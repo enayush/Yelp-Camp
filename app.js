@@ -73,9 +73,13 @@ app.use((req,res,next)=>{
     next();
 })
 
+app.use('/',userRouter);
 app.use('/campgrounds',campgroundsRouter);
 app.use('/campgrounds/:id/reviews',reviewsRouter);
-app.use('/',userRouter);
+
+app.get('/', (req, res) => {
+    res.render('home')
+});
 
 app.all('*',(req,res,next)=>{
     next(new ExpressError('Page Not Found',404));
